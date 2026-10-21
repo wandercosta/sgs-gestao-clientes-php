@@ -1,0 +1,22 @@
+# Configuração local (credenciais do banco)
+.env
+
+# IDEs e sistema operacional
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Dependências e build
+vendor/
+node_modules/
+build/
+dist/
+
+# Dumps de banco e logs
+*.dump
+*.sql.gz
+dump*.sql
+backup*.sql
+*.log
