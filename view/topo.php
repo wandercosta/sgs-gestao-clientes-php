@@ -1,17 +1,15 @@
-<hr>
+<nav class="nav topo">
+    <a class="btn-nav" href="menu.php"><i class="fas fa-home"></i> Menu</a>
+    <a class="btn-nav" href="clientes.php"><i class="fas fa-users"></i> Clientes</a>
 
-<nav  class="nav">
-  
-  <a class="btn-nav btn-light" style="display: flex;" href="menu.php" role="button"><i class="fas fa-home"  style="margin-right: 2px ; "></i>Menu</a>
-  <a class="btn-nav btn-light" href="clientes.php" role="button">Clientes</a>
-  <a class="btn-nav btn-light" href="veiculos.php" role="button">Veiculos</a>
-  <a class="btn-nav btn-light" href="servicos.php" role="button">Serviços</a>
-  <a class="btn-nav btn-light" href="estoque.php" role="button">Estoque</a>
-  <a class="btn-nav btn-light" href="configuracao.php" role="button">Configuração</a>
-  
-  
-  <a class="btn-nav btn-light" href="../index.php" role="button"  style ="margin-left: auto;">Sair</a>
-
+    <span class="topo-usuario">Olá, <?= e($_SESSION['usuario']['nome']) ?></span>
+    <form method="post" action="../controller/ControllerSair.php" class="topo-sair">
+        <?= campoCsrf() ?>
+        <button type="submit" class="btn-nav"><i class="fas fa-sign-out-alt"></i> Sair</button>
+    </form>
 </nav>
 
-<hr>
+<?php $flash = pegarFlash(); ?>
+<?php if ($flash): ?>
+    <div class="alert alert-<?= $flash['tipo'] === 'sucesso' ? 'success' : 'danger' ?> mensagem" role="alert"><?= e($flash['mensagem']) ?></div>
+<?php endif; ?>

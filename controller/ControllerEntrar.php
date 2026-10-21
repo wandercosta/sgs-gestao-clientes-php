@@ -1,33 +1,25 @@
 <?php
-require_once("../model/banco.php");
+require_once __DIR__ . '/../model/usuario.php';
 
-class entrarController {
+verificarCsrf();
 
+$login = trim((string) ($_POST['login'] ?? ''));
+$senha = (string) ($_POST['senha'] ?? '');
 
-    private $login;
-    private $senha;
-
-    public function __construct($login){
-        
-        $this->entrar = new Banco();
-        $this->criarFormulario($_POST['login']);
-        
-
-    }
-    private function criarFormulario($login){
-        $row = $this->entrar->pesquisarUsuario($login);
-        $this->login         =$row['login'];
-        $this->senha        =$row['senha'];
-
-        if($this->senha ==  $_POST['senha'] AND $_POST['senha'] != NULL AND $_POST['login'] AND  $this->login != NULL AND $this->senha != NULL ){
-            echo "<script>document.location='../view/menu.php'</script>";
-        }else{
-            echo "<script>alert('Verifique o Nome de Usuario ou Senha');history.back()</script>";
-        }
-    }
-
+if ($login === '' || $senha === '') {
+    flash('erro', 'Informe login e senha.');
+    redirecionar('../index.php');
 }
-$id = filter_input(INPUT_GET, 'id');
-$editar = new entrarController($id);
 
-?>
+$usuario = (new Usuario())->pesquisarPorLogin($login);
+
+// a senha fica no banco como hash (password_hash), nunca em texto puro
+if (!$usuario || !password_verify($senha, $usuario['senha'])) {
+    flash('erro', 'Login ou senha inválidos.');
+    redirecionar('../index.php');
+}
+
+session_regenerate_id(true);
+$_SESSION['usuario'] = ['id' => $usuario['id'], 'nome' => $usuario['nome']];
+
+redirecionar('../view/menu.php');

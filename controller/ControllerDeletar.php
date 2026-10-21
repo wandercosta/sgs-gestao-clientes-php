@@ -1,25 +1,15 @@
 <?php
-require_once("../model/banco.php");
-class deleta {
-    private $deleta;
+require_once __DIR__ . '/../model/cliente.php';
 
-    public function __construct($id){
+exigirLogin();
+verificarCsrf();
 
-    if($_GET["action"]== "deletarCliente"){
-        $this->deleta = new Banco();
-        if($this->deleta->delCliente($id)== TRUE){
-            echo "<script>alert('Registro deletado com sucesso!');document.location='../view/clientes.php'</script>";
-        }else{
-            echo "<script>alert('Erro ao deletar registro!');history.back()</script>";
-        }
-    }
-    else{
-        echo "<script>alert('Erro ao deletar registro!');history.back()</script>";
-    }
+$id = filter_input(INPUT_POST, 'cl_id', FILTER_VALIDATE_INT);
 
-
-}
+if ($id && (new Cliente())->excluir($id)) {
+    flash('sucesso', 'Cliente excluído com sucesso!');
+} else {
+    flash('erro', 'Não foi possível excluir o cliente.');
 }
 
-new deleta($_GET['id']);
-?>
+redirecionar('../view/clientes.php');
