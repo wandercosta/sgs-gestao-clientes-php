@@ -750,7 +750,7 @@ input:-webkit-autofill
 .tabela-rolagem table {
     min-width: 640px;
 }
-.acoes {
+.tabela-rolagem td {
     white-space: nowrap;
 }
 .acoes form {
