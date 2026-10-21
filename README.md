@@ -1,12 +1,24 @@
-# SGS — meu primeiro sistema de gestão
+<div align="center">
 
-Cadastro de clientes com login, em PHP puro e MVC simples. Escrevi em 2021 e revisei em 2026.
+# SGS · Gestão de Clientes em PHP
 
-![Lista de clientes](docs/clientes.png)
+**Meu primeiro sistema de gestão:** login e cadastro de clientes em PHP puro com MVC. Escrito em 2021 e revisado em 2026.
 
-| Login | Validação | Celular |
+![PHP 8.3](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)
+![MySQL 8.4](https://img.shields.io/badge/MySQL-8.4-4479A1?logo=mysql&logoColor=white)
+![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+![Sem framework](https://img.shields.io/badge/framework-nenhum-58af9b)
+
+![Demonstração: login, busca, validação de CPF e cadastro](docs/demo.gif)
+
+</div>
+
+> **2021 → 2026:** mesma stack, código revisado. SQL concatenado virou prepared statement, a senha ganhou hash,
+> a saída passou a ser escapada e o ambiente sobe com um comando. Veja a tabela [Antes x depois](#antes-x-depois).
+
+| Lista de clientes | Validação no servidor | Celular |
 |---|---|---|
-| ![Tela de login](docs/login.png) | ![Formulário com erros de validação](docs/validacao.png) | ![Lista de clientes no celular](docs/celular.png) |
+| ![Lista de clientes](docs/clientes.png) | ![Formulário com erros de validação](docs/validacao.png) | ![Lista de clientes no celular](docs/celular.png) |
 
 ## Por que fiz
 
@@ -15,20 +27,20 @@ Em 2026 voltei nele para corrigir o que eu não sabia na época, sem trocar a st
 
 ## Funcionalidades
 
-- Login com sessão e senha guardada em hash (`password_hash` / `password_verify`)
-- Cadastro, listagem, edição e exclusão de clientes
-- Validação no servidor: nome, CPF (dígitos verificadores), telefone, UF e CEP, com o erro ao lado de cada campo
-- Busca e ordenação por coluna na tabela de clientes
-- Proteção contra SQL injection, XSS e CSRF
-- Layout que funciona no celular
-- Banco criado e populado com dados fictícios automaticamente pelo Docker
+- 🔐 **Login** com sessão e senha guardada em hash (`password_hash` / `password_verify`)
+- 👥 **CRUD de clientes:** cadastro, listagem, edição e exclusão
+- ✅ **Validação no servidor:** nome, CPF (dígitos verificadores), telefone, UF e CEP, com o erro ao lado de cada campo
+- 🔎 **Busca e ordenação** por coluna na tabela
+- 🛡️ **Proteção contra SQL injection, XSS e CSRF**
+- 📱 **Layout que funciona no celular**
+- 🐳 **Banco pronto:** o Docker cria as tabelas e carrega dados fictícios
 
 ## Como rodar
 
 Precisa de [Docker](https://docs.docker.com/get-docker/) com Docker Compose.
 
 ```bash
-git clone https://github.com/wandercosta/SGS-V1-PHP.git && cd SGS-V1-PHP
+git clone https://github.com/wandercosta/sgs-gestao-clientes-php.git && cd sgs-gestao-clientes-php
 cp .env.example .env
 docker compose up --build
 ```
